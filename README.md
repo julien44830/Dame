@@ -31,6 +31,7 @@ export default {
 # Dame
 
 - simple jeu de Dame pour essayer le langage
+  
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
 
