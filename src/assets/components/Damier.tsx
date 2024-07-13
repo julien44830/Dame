@@ -1,4 +1,10 @@
+import Case from "./Case"
+import Pions from "./Pions";
+
 function Damier() {
+    const cases = Case;
+    console.log(typeof cases[1].id)
+
     const handleDragOver = (ev: React.DragEvent<HTMLDivElement>) => {
         // Empêcher le comportement par défaut pour autoriser le drop
         ev.preventDefault();
@@ -6,7 +12,7 @@ function Damier() {
 
     const handleDrop = (ev: React.DragEvent<HTMLDivElement>) => {
         ev.preventDefault();
-        // Obtenir l'identifiant de l'élément déplacé
+
         const data = ev.dataTransfer.getData("text/plain");
         const draggableElement = document.getElementById(data);
         if (draggableElement) {
@@ -20,74 +26,19 @@ function Damier() {
             id="damier"
             className="container-damier"
         >
-            <div
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-                id="1"
-                className="1"
-            >
-                <p>1</p>
-            </div>
-            <div
-                // onDragOver={handleDragOver}
-                // onDrop={handleDrop}
-                id="2"
-                className="2"
-            >
-                <p>2</p>
-            </div>
-            <div
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-                id="3"
-                className="3"
-            >
-                <p>3</p>
-            </div>
-            <div
-                // onDragOver={handleDragOver}
-                // onDrop={handleDrop}
-                id="4"
-                className="4"
-            >
-                <p>4</p>
-            </div>
-            <div
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-                id="5"
-                className="5"
-            >
-                <p>5</p>
-            </div>
-            <div
-                id="6"
-                className="6"
-            >
-                <p>6</p>
-            </div>
-            <div
-                            onDragOver={handleDragOver}
-                            onDrop={handleDrop}
-                id="7"
-                className="7"
-            >
-                <p>7</p>
-            </div>
-            <div
-                id="8"
-                className="8"
-            >
-                <p>8</p>
-            </div>
-            <div
-                            onDragOver={handleDragOver}
-                            onDrop={handleDrop}
-                id="9"
-                className="9"
-            >
-                <p>9</p>
-            </div>
+            {cases.map((c) => (
+                <div
+                    key={c.id}
+                    id={c.id}
+                    className={c.color ? "case-dark" : ""}
+                    onDragOver={c.color ? handleDragOver : undefined}
+                    onDrop={handleDrop}
+                >
+                    {c.hasPawn? <Pions nbId={String(c.idPion)} team={String(c.team)} /> : null}
+
+                    <p>{c.id}</p>
+                </div>
+            ))}
         </div>
     );
 }
